@@ -12,12 +12,21 @@ type Video struct {
 	CreatedAt int64  `json:"created_at"`
 }
 
-// BuildUser 序列化视频
-func BuildVideo(video model.Video) Video {
+// BuildVideo 序列化视频
+func BuildVideo(video *model.Video) Video {
 	return Video{
 		ID:        video.ID,
 		Title:     video.Title,
 		Info:      video.Info,
 		CreatedAt: video.CreatedAt.Unix(),
 	}
+}
+
+// BuildVideos 序列化视频列表
+func BuildVideos(items []model.Video) (videos []Video)  {
+	for _, item := range items {
+		video := BuildVideo(&item)
+		videos = append(videos, video)
+	}
+	return videos
 }

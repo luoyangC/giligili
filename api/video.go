@@ -2,7 +2,6 @@ package api
 
 import (
 	"giligili/service"
-	"giligili/serializer"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,21 +17,34 @@ func CreateVideo(c *gin.Context) {
 	}
 }
 
+// ListVideo 获取视频列表
 func ListVideo(c *gin.Context) {
-	c.JSON(200, "视频列表")
+	service := service.ListVideoService{}
+	res := service.List()
+	c.JSON(200, res)
 }
 
-func ShowVideo(c *gin.Context)  {
-	c.JSON(200, serializer.Response{
-		Status: 200,
-		Msg: "获取指定视频",
-	})
+// ShowVideo 获取指定视频详情
+func ShowVideo(c *gin.Context) {
+	service := service.ShowVideoService{}
+	res := service.Show(c.Param("id"))
+	c.JSON(200, res)
 }
 
-func UpdateVideo(c *gin.Context)  {
-	c.JSON(200, "更新视频")
+// UpdateVideo 更新指定视频
+func UpdateVideo(c *gin.Context) {
+	service := service.UpdateVideoService{}
+	if err := c.ShouldBind(&service); err == nil {
+		res := service.Update(c.Param("id"))
+		c.JSON(200, res)
+	} else {
+		c.JSON(200, ErrorResponse(err))
+	}
 }
 
-func DeleteVideo(c *gin.Context)  {
-	c.JSON(200, "删除视频")
+// DeleteVideo 删除指定视频
+func DeleteVideo(c *gin.Context) {
+	service := service.DeleteVideoService{}
+	res := service.Delete(c.Param("id"))
+	c.JSON(200, res)
 }

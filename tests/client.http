@@ -1,9 +1,29 @@
+# 测试接口
 # POST http://127.0.0.1:3000/api/v1/ping
 
-POST http://127.0.0.1:3000/api/v1/videos HTTP/1.1
-Content-Type: application/json
+# 添加一个视频
+# POST http://127.0.0.1:3000/api/v1/videos HTTP/1.1
+# Content-Type: application/json
 
-{
-    "Title": "这是第三个视频",
-    "Info": "iiliiili"
-}
+# {
+#     "Title": "这是第三个视频",
+#     "Info": "iiliiili"
+# }
+
+# 获取视频列表
+# GET http://127.0.0.1:3000/api/v1/videos HTTP/1.1
+
+# 获取指定视频
+# GET http://127.0.0.1:3000/api/v1/video/1 HTTP/1.1
+
+# 更新指定视频
+# PUT http://127.0.0.1:3000/api/v1/video/1 HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "Title": "这是第一个视频",
+#     "Info": "这是一个伟大的开始"
+# }
+
+# 删除指定视频
+# DELETE http://127.0.0.1:3000/api/v1/video/3 HTTP/1.1

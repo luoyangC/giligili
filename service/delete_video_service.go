@@ -1,6 +1,7 @@
 package service
 
 import (
+	"giligili/util"
 	"giligili/model"
 	"giligili/serializer"
 )
@@ -9,9 +10,9 @@ import (
 type DeleteVideoService struct{}
 
 // Delete 删除视频
-func (service *DeleteVideoService) Delete(id string) serializer.Response  {
+func (service *DeleteVideoService) Delete(id string, c *util.CustomClaims) serializer.Response  {
 	var video model.Video
-	if err := model.DB.First(&video, id).Error; err != nil {
+	if err := model.DB.Where("user_id = ?", c.ID).First(&video, id).Error; err != nil {
 		return serializer.Response{
 			Status: 4004,
 			Msg: "没有找到该视频",

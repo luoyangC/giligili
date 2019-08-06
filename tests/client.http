@@ -4,10 +4,11 @@
 # 添加一个视频
 # POST http://127.0.0.1:3000/api/v1/videos HTTP/1.1
 # Content-Type: application/json
+# token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOjEsIlVzZXJOYW1lIjoibHVveWFuZ2MiLCJTdGF0dXMiOiJhY3RpdmUiLCJBdmF0YXIiOiIiLCJleHAiOjE1NjUxMDUyMjQsImlzcyI6Imx1b3lhbmdjIiwibmJmIjoxNTY1MTAwNjI0fQ.CQ4VEeWWpFQmtD0m6_u92BoeTd6AuiXY5eGsDSWNhOU
 
 # {
-#     "Title": "这是第三个视频",
-#     "Info": "iiliiili"
+#     "Title": "有权限的视频",
+#     "Info": "auth"
 # }
 
 # 获取视频列表
@@ -17,13 +18,14 @@
 # GET http://127.0.0.1:3000/api/v1/video/1 HTTP/1.1
 
 # 更新指定视频
-# PUT http://127.0.0.1:3000/api/v1/video/1 HTTP/1.1
-# Content-Type: application/json
+PUT http://127.0.0.1:3000/api/v1/video/1 HTTP/1.1
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOjIsIlVzZXJOYW1lIjoiamlhenEiLCJTdGF0dXMiOiJhY3RpdmUiLCJBdmF0YXIiOiIiLCJleHAiOjE1NjUxMDkwNTgsImlzcyI6Imx1b3lhbmdjIiwibmJmIjoxNTY1MTA0NDU4fQ.m6l4ImCtADlUhCkbEjdQEuBS_Wffaabby3tLPjybzzQ
 
-# {
-#     "Title": "这是第一个视频",
-#     "Info": "这是一个伟大的开始"
-# }
+{
+    "Title": "这是第一个视频",
+    "Info": "更新一下xxx"
+}
 
 # 删除指定视频
 # DELETE http://127.0.0.1:3000/api/v1/video/3 HTTP/1.1

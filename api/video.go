@@ -1,6 +1,7 @@
 package api
 
 import (
+	"giligili/util"
 	"giligili/service"
 
 	"github.com/gin-gonic/gin"
@@ -8,9 +9,10 @@ import (
 
 // CreateVideo 添加视频
 func CreateVideo(c *gin.Context) {
+	claims := c.MustGet("claims").(*util.CustomClaims)
 	service := service.CreateVideoService{}
 	if err := c.ShouldBind(&service); err == nil {
-		res := service.Create()
+		res := service.Create(claims)
 		c.JSON(200, res)
 	} else {
 		c.JSON(200, ErrorResponse(err))
@@ -33,9 +35,10 @@ func ShowVideo(c *gin.Context) {
 
 // UpdateVideo 更新指定视频
 func UpdateVideo(c *gin.Context) {
+	claims := c.MustGet("claims").(*util.CustomClaims)
 	service := service.UpdateVideoService{}
 	if err := c.ShouldBind(&service); err == nil {
-		res := service.Update(c.Param("id"))
+		res := service.Update(c.Param("id"), claims)
 		c.JSON(200, res)
 	} else {
 		c.JSON(200, ErrorResponse(err))
@@ -44,7 +47,8 @@ func UpdateVideo(c *gin.Context) {
 
 // DeleteVideo 删除指定视频
 func DeleteVideo(c *gin.Context) {
+	claims := c.MustGet("claims").(*util.CustomClaims)
 	service := service.DeleteVideoService{}
-	res := service.Delete(c.Param("id"))
+	res := service.Delete(c.Param("id"), claims)
 	c.JSON(200, res)
 }

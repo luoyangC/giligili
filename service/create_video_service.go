@@ -1,6 +1,7 @@
 package service
 
 import (
+	"giligili/util"
 	"giligili/model"
 	"giligili/serializer"
 )
@@ -12,10 +13,11 @@ type CreateVideoService struct {
 }
 
 // Create 创建视频
-func (service *CreateVideoService) Create() serializer.Response {
+func (service *CreateVideoService) Create(c *util.CustomClaims) serializer.Response {
 	video := model.Video{
 		Title: service.Title,
 		Info: service.Info,
+		UserID: c.ID,
 	}
 	if err := model.DB.Create(&video).Error; err != nil {
 		return serializer.Response{

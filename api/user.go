@@ -1,10 +1,9 @@
 package api
 
 import (
-	"giligili/serializer"
 	"giligili/service"
+	"giligili/serializer"
 
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
@@ -38,15 +37,4 @@ func UserLogin(c *gin.Context) {
 func UserMe(c *gin.Context) {
 	claims := c.MustGet("claims")
 	c.JSON(200, claims)
-}
-
-// UserLogout 用户登出
-func UserLogout(c *gin.Context) {
-	s := sessions.Default(c)
-	s.Clear()
-	s.Save()
-	c.JSON(200, serializer.Response{
-		Status: 0,
-		Msg:    "登出成功",
-	})
 }

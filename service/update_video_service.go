@@ -1,6 +1,7 @@
 package service
 
 import (
+	"giligili/util"
 	"giligili/model"
 	"giligili/serializer"
 )
@@ -12,9 +13,9 @@ type UpdateVideoService struct{
 }
 
 // Update 更新视频
-func (service *UpdateVideoService) Update(id string) serializer.Response  {
+func (service *UpdateVideoService) Update(id string, c *util.CustomClaims) serializer.Response  {
 	var video model.Video
-	if err := model.DB.First(&video, id).Error; err != nil {
+	if err := model.DB.Where("user_id = ?", c.ID).First(&video, id).Error; err != nil {
 		return serializer.Response{
 			Status: 4004,
 			Msg: "没有找到该视频",

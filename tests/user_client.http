@@ -2,8 +2,8 @@
 # Content-Type: application/json
 
 # {
-#     "NickName": "amor",
-#     "UserName": "luoyangc",
+#     "NickName": "qige",
+#     "UserName": "jiazq",
 #     "password": "12345678",
 #     "password_confirm": "12345678"
 # }
@@ -12,9 +12,9 @@
 # Content-Type: application/json
 
 # {
-#     "user_name": "luoyangc",
+#     "user_name": "jiazq",
 #     "password": "12345678"
 # }
 
 GET http://127.0.0.1:3000/api/v1/user/me HTTP/1.1
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOjEsIlVzZXJOYW1lIjoibHVveWFuZ2MiLCJTdGF0dXMiOiJhY3RpdmUiLCJBdmF0YXIiOiIiLCJleHAiOjE1NjUxMDUyMjQsImlzcyI6Imx1b3lhbmdjIiwibmJmIjoxNTY1MTAwNjI0fQ.CQ4VEeWWpFQmtD0m6_u92BoeTd6AuiXY5eGsDSWNhOU
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOjIsIlVzZXJOYW1lIjoiamlhenEiLCJTdGF0dXMiOiJhY3RpdmUiLCJBdmF0YXIiOiIiLCJleHAiOjE1NjUxMDkwNTgsImlzcyI6Imx1b3lhbmdjIiwibmJmIjoxNTY1MTA0NDU4fQ.m6l4ImCtADlUhCkbEjdQEuBS_Wffaabby3tLPjybzzQ

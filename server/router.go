@@ -42,7 +42,6 @@ func NewRouter() *gin.Engine {
 
 		// 需要登录保护的
 		v1.Use(middleware.JWTAuth())
-		v1.Use(middleware.CurrentUser())
 		{
 			// User Routing
 			v1.GET("user/me", api.UserMe)

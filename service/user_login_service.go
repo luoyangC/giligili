@@ -38,14 +38,14 @@ func (service *UserLoginService) Login() (*serializer.Response) {
 		}
 	}
 	
-	res := generateToken(user)
+	res := generateToken(&user)
 	return res
 }
 
 // 生成令牌
-func generateToken(user model.User) *serializer.Response {
+func generateToken(user *model.User) *serializer.Response {
     j := util.NewJWT()
-    claims := util.NewCustomClaims(user.ID, user.UserName)
+    claims := util.NewCustomClaims(user)
 
     token, err := j.CreateToken(claims)
 

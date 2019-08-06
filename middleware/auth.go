@@ -3,23 +3,10 @@ package middleware
 import (
 	"log"
 	"giligili/util"
-	"giligili/model"
 	"giligili/serializer"
 
 	"github.com/gin-gonic/gin"
 )
-
-// CurrentUser 获取登录用户
-func CurrentUser() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		claims := c.MustGet("claims").(*util.CustomClaims)
-		user, err := model.GetUser(claims.ID)
-		if err == nil {
-			c.Set("user", &user)
-		}
-		c.Next()
-	}
-}
 
 // JWTAuth 中间件，检查token
 func JWTAuth() gin.HandlerFunc {

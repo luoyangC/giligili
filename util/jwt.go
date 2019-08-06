@@ -1,6 +1,7 @@
 package util
 
 import (
+	"giligili/model"
 	"os"
 	"log"
 	"time"
@@ -27,6 +28,8 @@ type JWT struct {
 type CustomClaims struct {
 	ID       uint   `json:"UserId"`
 	UserName string `json:"UserName"`
+	Status   string `json:"Status"`
+	Avatar   string `json:"Avatar"`
 	jwt.StandardClaims
 }
 
@@ -38,10 +41,12 @@ func NewJWT() *JWT {
 }
 
 // 新建一个customClaims实例
-func NewCustomClaims(ID uint, UserName string) *CustomClaims  {
+func NewCustomClaims(user *model.User) *CustomClaims  {
 	return &CustomClaims{
-		ID,
-		UserName,
+		user.ID,
+		user.UserName,
+		user.Status,
+		user.Avatar,
 		jwt.StandardClaims{
             NotBefore: int64(time.Now().Unix() - 1000), // 签名生效时间
             ExpiresAt: int64(time.Now().Unix() + 3600), // 过期时间 一小时

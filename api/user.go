@@ -36,7 +36,8 @@ func UserLogin(c *gin.Context) {
 
 // UserMe 用户详情
 func UserMe(c *gin.Context) {
-	c.JSON(200, "ok")
+	claims := c.MustGet("claims")
+	c.JSON(200, claims)
 }
 
 // UserLogout 用户登出

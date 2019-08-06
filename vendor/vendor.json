@@ -3,6 +3,18 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "l5xRPoG4I0L/4rgFA0yRPmd+tJ4=",
+			"path": "github.com/appleboy/gin-jwt",
+			"revision": "ab65078fb0676718946c7449818a13f44f7de2cb",
+			"revisionTime": "2019-07-11T01:34:05Z"
+		},
+		{
+			"checksumSHA1": "P6u6fDWwSfRL2Bc6uhZ9kcoPsek=",
+			"path": "github.com/dgrijalva/jwt-go",
+			"revision": "5e25c22bd5d6de03265bbe5462dcd162f85046f6",
+			"revisionTime": "2019-06-20T18:01:02Z"
+		},
+		{
 			"checksumSHA1": "G6hfm9nHCCn3v4vrp/rjLKWRcpI=",
 			"path": "github.com/gin-contrib/cors",
 			"revision": "6653abe078942068446bc839e67ef20d6d7adec2",

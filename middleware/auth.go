@@ -1,42 +1,47 @@
 package middleware
 
 import (
+	"log"
+	"giligili/util"
 	"giligili/model"
 	"giligili/serializer"
 
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
 // CurrentUser 获取登录用户
 func CurrentUser() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		session := sessions.Default(c)
-		uid := session.Get("user_id")
-		if uid != nil {
-			user, err := model.GetUser(uid)
-			if err == nil {
-				c.Set("user", &user)
-			}
+		claims := c.MustGet("claims").(*util.CustomClaims)
+		user, err := model.GetUser(claims.ID)
+		if err == nil {
+			c.Set("user", &user)
 		}
 		c.Next()
 	}
 }
 
-// AuthRequired 需要登录
-func AuthRequired() gin.HandlerFunc {
+// JWTAuth 中间件，检查token
+func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if user, _ := c.Get("user"); user != nil {
-			if _, ok := user.(*model.User); ok {
-				c.Next()
-				return
-			}
+		token := c.Request.Header.Get("token")
+		if token == "" {
+			c.JSON(200, serializer.Response{
+				Status: 4003,
+				Msg:    "需要登录",
+			})
+			c.Abort()
 		}
-
-		c.JSON(200, serializer.Response{
-			Status: 401,
-			Msg:    "需要登录",
-		})
-		c.Abort()
+		log.Print("get token: ", token)
+		j := util.NewJWT()
+		claims, err := j.ParseToken(token)
+		if err != nil {
+			c.JSON(200, serializer.Response{
+				Status: 5000,
+				Error:  err.Error(),
+			})
+			c.Abort()
+		}
+		c.Set("claims", claims)
 	}
 }

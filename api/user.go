@@ -27,18 +27,8 @@ func UserRegister(c *gin.Context) {
 func UserLogin(c *gin.Context) {
 	var service service.UserLoginService
 	if err := c.ShouldBind(&service); err == nil {
-		if user, err := service.Login(); err != nil {
-			c.JSON(200, err)
-		} else {
-			// 设置Session
-			s := sessions.Default(c)
-			s.Clear()
-			s.Set("user_id", user.ID)
-			s.Save()
-
-			res := serializer.BuildUserResponse(user)
-			c.JSON(200, res)
-		}
+		res := service.Login()
+		c.JSON(200, res)
 	} else {
 		c.JSON(200, ErrorResponse(err))
 	}
@@ -46,9 +36,7 @@ func UserLogin(c *gin.Context) {
 
 // UserMe 用户详情
 func UserMe(c *gin.Context) {
-	user := CurrentUser(c)
-	res := serializer.BuildUserResponse(*user)
-	c.JSON(200, res)
+	c.JSON(200, "ok")
 }
 
 // UserLogout 用户登出
